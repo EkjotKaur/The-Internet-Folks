@@ -22,12 +22,10 @@ exports.signup = async (req, res) => {
   try {
     foundUser = await User.findOne({ email: req.body.email });
     if (foundUser) {
-      res
-        .status(404)
-        .json({
-          status: false,
-          errors: [{ message: "Email address already exists." }],
-        });
+      res.status(404).json({
+        status: false,
+        errors: [{ message: "Email address already exists." }],
+      });
     }
   } catch (err) {
     res.status(500).json({
@@ -35,8 +33,12 @@ exports.signup = async (req, res) => {
       errors: [{ message: "Something went wrong" }],
     });
   }
+  let name;
+  if (req.body.last_name) name = req.body.first_name + " " + req.body.last_name;
+  else name = req.body.first_name;
   const newUser = new User({
     ...req.body,
+    name,
     roleId: foundRole,
   });
 
