@@ -23,7 +23,7 @@ exports.createStudent = async (req, res) => {
   } catch (err) {
     return res.status(500).json({
       status: false,
-      errors: [{ message: "Something went wrong", err: err }],
+      errors: [{ message: "Something went wrong" }],
     });
   }
 
@@ -49,7 +49,7 @@ exports.createStudent = async (req, res) => {
     .catch((err) => {
       return res.status(500).json({
         status: false,
-        errors: [{ message: "Something went wrong", err: err }],
+        errors: [{ message: "Something went wrong" }],
       });
     });
 };
@@ -62,7 +62,7 @@ exports.getStudents = (req, res) => {
     .catch((err) => {
       return res.status(500).json({
         status: false,
-        errors: [{ message: "Something went wrong", err: err }],
+        errors: [{ message: "Something went wrong" }],
       });
     });
 };

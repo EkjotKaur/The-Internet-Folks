@@ -32,12 +32,10 @@ exports.createRole = async (req, res) => {
       res.status(200).json({ status: true, contents: { data: savedRole } });
     })
     .catch((err) => {
-      res
-        .status(500)
-        .json({
-          status: false,
-          errors: [{ message: "Something went wrong", err: err }],
-        });
+      res.status(500).json({
+        status: false,
+        errors: [{ message: "Something went wrong" }],
+      });
     });
 };
 
@@ -47,11 +45,9 @@ exports.getRole = (req, res) => {
       res.status(200).json({ status: true, contents: { data: roles } });
     })
     .catch((err) => {
-      res
-        .status(500)
-        .json({
-          status: false,
-          errors: [{ message: "Something went wrong", err: err }],
-        });
+      res.status(500).json({
+        status: false,
+        errors: [{ message: "Something went wrong" }],
+      });
     });
 };

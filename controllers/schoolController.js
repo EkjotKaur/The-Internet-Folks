@@ -12,12 +12,10 @@ exports.createSchool = (req, res) => {
       res.status(200).json({ status: true, contents: { data: savedSchool } });
     })
     .catch((err) => {
-      res
-        .status(500)
-        .json({
-          status: false,
-          errors: [{ message: "Something went wrong", err: err }],
-        });
+      res.status(500).json({
+        status: false,
+        errors: [{ message: "Something went wrong" }],
+      });
     });
 };
 
@@ -29,12 +27,10 @@ exports.getSchools = (req, res) => {
         .json({ status: true, contents: { data: schools } });
     })
     .catch((err) => {
-      return res
-        .status(500)
-        .json({
-          status: false,
-          errors: [{ message: "Something went wrong", err: err }],
-        });
+      return res.status(500).json({
+        status: false,
+        errors: [{ message: "Something went wrong" }],
+      });
     });
 };
 
@@ -43,12 +39,10 @@ exports.getStudents = async (req, res) => {
   try {
     foundSchools = await School.find();
   } catch (err) {
-    return res
-      .status(500)
-      .json({
-        status: false,
-        errors: [{ message: "Something went wrong", err: err }],
-      });
+    return res.status(500).json({
+      status: false,
+      errors: [{ message: "Something went wrong" }],
+    });
   }
 
   let foundStudents = foundSchools.map(async (school) => {

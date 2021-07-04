@@ -14,7 +14,7 @@ exports.signup = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       status: false,
-      errors: [{ message: "Something went wrong", err: err }],
+      errors: [{ message: "Something went wrong" }],
     });
   }
 
@@ -24,12 +24,15 @@ exports.signup = async (req, res) => {
     if (foundUser) {
       res
         .status(404)
-        .json({ status: false, errors: [{ message: "Email address already exists." }] });
+        .json({
+          status: false,
+          errors: [{ message: "Email address already exists." }],
+        });
     }
   } catch (err) {
     res.status(500).json({
       status: false,
-      errors: [{ message: "Something went wrong", err: err }],
+      errors: [{ message: "Something went wrong" }],
     });
   }
   const newUser = new User({
@@ -60,7 +63,7 @@ exports.signup = async (req, res) => {
           console.log(err);
           return res.status(500).json({
             success: "false",
-            errors: [{ message: "Something went wrong", err: err }],
+            errors: [{ message: "Something went wrong" }],
           });
         });
     });
@@ -72,17 +75,13 @@ exports.login = async (req, res) => {
   try {
     foundUser = await User.findOne({ email: req.body.email });
     if (!foundUser) {
-      res
-        .status(422)
-        .json({ status: false, message: "Invalid email or password" });
+      res.status(422).json({ status: false, message: "User not found." });
     }
   } catch (err) {
-    res
-      .status(500)
-      .json({
-        status: false,
-        errors: [{ message: "Something went wrong", err: err }],
-      });
+    res.status(500).json({
+      status: false,
+      errors: [{ message: "Something went wrong" }],
+    });
   }
 
   bcrypt
@@ -122,12 +121,10 @@ exports.getUsers = (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res
-        .status(500)
-        .json({
-          status: false,
-          errors: [{ message: "Something went wrong", err: err }],
-        });
+      res.status(500).json({
+        status: false,
+        errors: [{ message: "Something went wrong" }],
+      });
     });
 };
 
@@ -137,11 +134,9 @@ exports.getUserById = (req, res) => {
       res.status(200).json({ status: true, contents: { data: users } });
     })
     .catch((err) => {
-      res
-        .status(500)
-        .json({
-          status: false,
-          errors: [{ message: "Something went wrong", err: err }],
-        });
+      res.status(500).json({
+        status: false,
+        errors: [{ message: "Something went wrong" }],
+      });
     });
 };
