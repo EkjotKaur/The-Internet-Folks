@@ -6,7 +6,7 @@ const rolesSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    scope: [
+    scopes: [
       {
         type: String,
       },
