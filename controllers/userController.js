@@ -24,7 +24,7 @@ exports.signup = async (req, res) => {
     if (foundUser) {
       res
         .status(404)
-        .json({ status: false, errors: [{ message: "Email already exists" }] });
+        .json({ status: false, errors: [{ message: "Email address already exists." }] });
     }
   } catch (err) {
     res.status(500).json({

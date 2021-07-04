@@ -50,7 +50,7 @@ module.exports = async (req, res, next) => {
     method == "GET"
   ) {
     console.log("hello");
-    if (foundRole.scope.includes("school-student")) next();
+    if (foundRole.scope.includes("school-students")) next();
     else {
       res.status(401).json({
         status: false,

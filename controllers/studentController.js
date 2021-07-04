@@ -30,7 +30,7 @@ exports.createStudent = async (req, res) => {
   if (!foundSchool) {
     return res
       .status(404)
-      .json({ status: false, errors: [{ message: "User not found" }] });
+      .json({ status: false, errors: [{ message: "School not found" }] });
   }
 
   const student = new Student({
