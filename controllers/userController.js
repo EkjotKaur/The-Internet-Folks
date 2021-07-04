@@ -12,9 +12,10 @@ exports.signup = async (req, res) => {
       res.status(404).json({ status: false, message: "Cannot find role" });
     }
   } catch (err) {
-    res
-      .status(500)
-      .json({ status: false, errors: [{ message: "Something went wrong" }] });
+    res.status(500).json({
+      status: false,
+      errors: [{ message: "Something went wrong", err: err }],
+    });
   }
 
   let foundUser;
@@ -26,9 +27,10 @@ exports.signup = async (req, res) => {
         .json({ status: false, errors: [{ message: "Email already exists" }] });
     }
   } catch (err) {
-    res
-      .status(500)
-      .json({ status: false, errors: [{ message: "Something went wrong" }] });
+    res.status(500).json({
+      status: false,
+      errors: [{ message: "Something went wrong", err: err }],
+    });
   }
   const newUser = new User({
     ...req.body,
@@ -58,7 +60,7 @@ exports.signup = async (req, res) => {
           console.log(err);
           return res.status(500).json({
             success: "false",
-            errors: [{ message: "Something went wrong" }],
+            errors: [{ message: "Something went wrong", err: err }],
           });
         });
     });
@@ -77,7 +79,10 @@ exports.login = async (req, res) => {
   } catch (err) {
     res
       .status(500)
-      .json({ status: false, errors: [{ message: "Something went wrong" }] });
+      .json({
+        status: false,
+        errors: [{ message: "Something went wrong", err: err }],
+      });
   }
 
   bcrypt
@@ -97,7 +102,9 @@ exports.login = async (req, res) => {
         {}
       );
 
-      res.status(200).json({ status: true, contents: { data: foundUser, token } });
+      res
+        .status(200)
+        .json({ status: true, contents: { data: foundUser, token } });
     })
     .catch((err) => {
       console.log(err);
@@ -117,7 +124,10 @@ exports.getUsers = (req, res) => {
       console.log(err);
       res
         .status(500)
-        .json({ status: false, errors: [{ message: "Something went wrong" }] });
+        .json({
+          status: false,
+          errors: [{ message: "Something went wrong", err: err }],
+        });
     });
 };
 
@@ -129,6 +139,9 @@ exports.getUserById = (req, res) => {
     .catch((err) => {
       res
         .status(500)
-        .json({ status: false, errors: [{ message: "Something went wrong" }] });
+        .json({
+          status: false,
+          errors: [{ message: "Something went wrong", err: err }],
+        });
     });
 };

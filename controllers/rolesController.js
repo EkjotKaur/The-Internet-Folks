@@ -34,7 +34,10 @@ exports.createRole = async (req, res) => {
     .catch((err) => {
       res
         .status(500)
-        .json({ status: false, errors: [{ message: "Something went wrong" }] });
+        .json({
+          status: false,
+          errors: [{ message: "Something went wrong", err: err }],
+        });
     });
 };
 
@@ -46,6 +49,9 @@ exports.getRole = (req, res) => {
     .catch((err) => {
       res
         .status(500)
-        .json({ status: false, errors: [{ message: "Something went wrong" }] });
+        .json({
+          status: false,
+          errors: [{ message: "Something went wrong", err: err }],
+        });
     });
 };

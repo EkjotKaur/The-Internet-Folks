@@ -21,9 +21,10 @@ exports.createStudent = async (req, res) => {
   try {
     foundSchool = await School.findById(req.body.schoolId);
   } catch (err) {
-    return res
-      .status(500)
-      .json({ status: false, errors: [{ message: "Something went wrong" }] });
+    return res.status(500).json({
+      status: false,
+      errors: [{ message: "Something went wrong", err: err }],
+    });
   }
 
   if (!foundSchool) {
@@ -41,23 +42,27 @@ exports.createStudent = async (req, res) => {
   student
     .save()
     .then((student) => {
-      res.status(200).json({ status: true, contents: { data: student } });
+      return res
+        .status(200)
+        .json({ status: true, contents: { data: student } });
     })
     .catch((err) => {
-      res
-        .status(500)
-        .json({ status: false, errors: [{ message: "Something went wrong" }] });
+      return res.status(500).json({
+        status: false,
+        errors: [{ message: "Something went wrong", err: err }],
+      });
     });
 };
 
 exports.getStudents = (req, res) => {
   Student.find()
     .then((users) => {
-      res.status(200).json({ status: true, contents: { data: users } });
+      return res.status(200).json({ status: true, contents: { data: users } });
     })
     .catch((err) => {
-      res
-        .status(500)
-        .json({ status: false, errors: [{ message: "Something went wrong" }] });
+      return res.status(500).json({
+        status: false,
+        errors: [{ message: "Something went wrong", err: err }],
+      });
     });
 };
